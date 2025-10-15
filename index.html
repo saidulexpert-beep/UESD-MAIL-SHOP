@@ -255,6 +255,32 @@
             justify-content: center;
             border: 2px solid white;
         }
+        
+        /* NEW: Support Page Styles */
+        .support-link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+        .support-link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+            border-color: #007bff;
+        }
+        .support-link-card img {
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body class="max-w-md mx-auto">
@@ -362,7 +388,7 @@
 ⚡ কোনো সমস্যা হলে আমরা সঙ্গে সঙ্গে সমাধান করি।
 🕐 আমরা ২৪ ঘণ্টা সার্ভিস দিয়ে থাকি।
 💬 যেকোনো প্রয়োজনে যোগাযোগ করুন আমাদের সাপোর্ট টিমের সাথে।
-💎 USED MAIL SHOP— বিশ্বাস, গুণমান ও সাপোর্টের প্রতীক!                        
+💎 USED MAIL SHOP — বিশ্বাস, গুণমান ও সাপোর্টের প্রতীক!                        
                     </p>
                 </div>
                 <div class="p-4 space-y-6">
@@ -414,38 +440,30 @@
                         <span>⚡ More Features</span>
                         <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
                     </button>
-                    <a href="https://t.me/ownersofceo01" target="_blank" class="w-full card-bg p-4 rounded-xl flex justify-between items-center text-left text-lg font-semibold">
-                        <span>𝑺𝒖𝒑𝒑𝒐𝒓𝒕 𝑻𝒆𝒂𝒎</span>
-                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-gray-600"></i>
-                    </a>
+                    <button id="go-to-support-btn" class="w-full p-4 rounded-xl flex justify-between items-center text-left text-lg font-bold btn-gradient shadow-lg">
+                        <span class="flex items-center gap-3">
+                            <i data-lucide="headphones" class="w-6 h-6"></i>
+                            <span>Support Team</span>
+                        </span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
                 </div>
 
-                <div class="card-bg p-4 rounded-2xl">
-                    <h3 class="text-md font-semibold text-gray-700 mb-4 text-center">Follow Us On</h3>
-                    <div class="flex justify-center items-center space-x-6">
-                       <a href="https://youtube.com/@saidulexpert?si=cT6fpmM13Qh7m2Zc" target="_blank" class="text-gray-600 hover:text-red-600 transition-colors">
-                           <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                       </a>
-                       <a href="https://t.me/SAIDULHP" target="_blank" class="text-gray-600 hover:text-sky-500 transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.65 12c-.88-.25-.89-1.02.2-1.3l15.67-6.11c.8-.32 1.45.19 1.18 1.1l-2.53 11.64c-.23.95-1.17 1.17-1.87.73l-4.5-3.33-2.15 2.07c-.24.24-.45.46-.8.46-.42 0-.59-.16-.69-.53z"/></svg>
-                       </a>
-<a href="http://tiktok.com/@saidulexpert" target="_blank" class="text-gray-600 hover:text-black transition-colors">
-    <img src="https://i.postimg.cc/hPdCfhKD/download.png" alt="Description of the image" class="w-8 h-8">                      
-                       </a>
-                    </div>
-                </div>
-                
-                <div class="mt-6">
-                    <h3 class="text-xl font-bold text-center mb-4 text-gray-800">More Apps</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <a href="https://shorturl.at/FxO7m" target="_blank" class="card-bg rounded-xl p-4 flex flex-col items-center text-center space-y-3 hover:border-blue-500/50"><img src="https://i.postimg.cc/RFQwLZHn/IMG-20250926-201441-985.jpg?text=APP+1" class="w-20 h-20 rounded-full object-cover"><h4 class="font-bold text-lg text-accent-gradient">𝐄𝐗𝐏𝐄𝐑𝐓𝐞𝐚𝐫𝐧</h4><p class="text-xs text-gray-600">একদম ফ্রীতে ইনকাম করতে পারবেন </p></a>
-                        <a href="#" class="card-bg rounded-xl p-4 flex flex-col items-center text-center space-y-3 hover:border-blue-500/50"><img src="https://i.postimg.cc/7hTd1GyZ/air-drop-logo-96485-1865.jpg?text=APP+2" class="w-20 h-20 rounded-full object-cover"><h4 class="font-bold text-lg text-accent-gradient">Airdrop</h4><p class="text-xs text-gray-600">Coming soon.</p></a>
-                    </div>
-                </div>
-                
                 <div class="text-center pt-6">
                      <p class="text-center text-gray-600 text-sm">Developed by <a href="https://t.me/bd_Storebot/Botshop" target="_blank" class="font-semibold text-[#007bff] hover:underline">𝐁𝐃 𝐒𝐓𝐎𝐑𝐄</a></p>
                 </div>
+            </div>
+
+            <div id="support-page" class="p-4 space-y-4 sub-page">
+                <div class="relative flex items-center justify-center mb-4">
+                    <button onclick="navigateTo('profile-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                    <h2 class="text-xl font-bold text-center text-gray-800">Support Center</h2>
+                </div>
+                <p class="text-center text-gray-600 text-sm">যেকোনো প্রয়োজনে নিচের মাধ্যমগুলোতে যোগাযোগ করুন।</p>
+                <div id="support-channels-list" class="space-y-3">
+                    </div>
             </div>
             
             <div id="features-page" class="p-4 space-y-8 sub-page">
@@ -591,7 +609,7 @@
     <a id="fab-common-telegram" href="https://t.me/earn_Supportbot" target="_blank" class="fab-button fab-telegram">
         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.65 12c-.88-.25-.89-1.02.2-1.3l15.67-6.11c.8-.32 1.45.19 1.18 1.1l-2.53 11.64c-.23.95-1.17 1.17-1.87.73l-4.5-3.33-2.15 2.07c-.24.24-.45.46-.8.46-.42 0-.59-.16-.69-.53z"/></svg>
     </a>
-    <a id="fab-features-whatsapp" href="https://wa.me/8801855879942" target="_blank" class="fab-button fab-whatsapp">
+    <a id="fab-features-whatsapp" href="https://wa.me/8801707933785" target="_blank" class="fab-button fab-whatsapp">
          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 20.12c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.38 0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24zm4.52-6.14c-.25-.12-1.47-.72-1.7-.82s-.39-.12-.56.12c-.17.25-.64.82-.79.98-.15.17-.29.19-.54.06-.25-.12-1.06-.39-2.02-1.24-.75-.66-1.25-1.48-1.4-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07s.88 2.4 1 2.56c.12.17 1.75 2.67 4.24 3.73.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18s-.25-.11-.5-.24z"/></svg>
     </a>
 
@@ -689,15 +707,16 @@
 
 
     <script type="module">
-        const ADMIN_UID = "6954647230";
-const firebaseConfig = {
-  apiKey: "AIzaSyAEV4zkuTcRYIFP2AMmKJTyDUTzSYLnbbM",
-  authDomain: "used-mail-shop.firebaseapp.com",
-  projectId: "used-mail-shop",
-  storageBucket: "used-mail-shop.firebasestorage.app",
-  messagingSenderId: "251382358623",
-  appId: "1:251382358623:web:a567a9349d1fd87277b1ea"
-};
+        const ADMIN_UID = "7358825471";
+        const firebaseConfig = {
+          apiKey: "AIzaSyCoCy08FL_sHHdA0f2cJg0BaF-iYAhFuk0",
+          authDomain: "mail-store-4692b.firebaseapp.com",
+          databaseURL: "https://mail-store-4692b-default-rtdb.firebaseio.com",
+          projectId: "mail-store-4692b",
+          storageBucket: "mail-store-4692b.firebasestorage.app",
+          messagingSenderId: "264936867411",
+          appId: "1:264936867411:web:5933919e5bafae617968a6"
+        };
         
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, serverTimestamp, query, where, getDocs, orderBy, limit, runTransaction, getCountFromServer, writeBatch, updateDoc, Timestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
@@ -849,6 +868,7 @@ const firebaseConfig = {
                 'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
                 'tutorial-page': loadTutorials,
+                'support-page': loadSupportPage, // New page loader
                 'recharge-page': () => { 
                     loadRechargeHistory(); 
                     setupDynamicAmountHandlers('recharge');
@@ -876,6 +896,8 @@ const firebaseConfig = {
             document.getElementById('deposit-details-ok-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.add('hidden'));
 
             document.getElementById('more-features-btn').addEventListener('click', handleFeaturesClick);
+            document.getElementById('go-to-support-btn').addEventListener('click', () => navigateTo('support-page')); // Updated support button
+            
             document.getElementById('features-deposit-btn').addEventListener('click', () => navigateTo('pay-page'));
             document.getElementById('features-recharge-btn').addEventListener('click', () => navigateTo('recharge-page'));
             document.getElementById('features-receive-btn').addEventListener('click', handleReceive);
@@ -1748,6 +1770,34 @@ const firebaseConfig = {
             }
         }
         
+        // NEW: Load Support Page dynamically from Firebase
+        async function loadSupportPage() {
+            const supportContainer = document.getElementById('support-channels-list');
+            supportContainer.innerHTML = getLoadingHTML();
+            try {
+                const q = query(collection(db, "support_channels"), where("isActive", "==", true), orderBy("order"));
+                const snapshot = await getDocs(q);
+                if (snapshot.empty) {
+                    supportContainer.innerHTML = '<p class="text-center text-gray-600">দুঃখিত, এই মুহূর্তে কোনো সাপোর্ট চ্যানেল উপলব্ধ নেই।</p>';
+                    return;
+                }
+                
+                supportContainer.innerHTML = snapshot.docs.map(doc => {
+                    const channel = doc.data();
+                    return `
+                        <a href="${channel.link}" target="_blank" class="support-link-card">
+                            <img src="${channel.iconUrl}" alt="${channel.name} logo">
+                            <span>${channel.name}</span>
+                        </a>
+                    `;
+                }).join('');
+
+            } catch (e) {
+                supportContainer.innerHTML = '<p class="text-center text-red-600">সাপোর্ট অপশন লোড করা যায়নি।</p>';
+                console.error("Error loading support channels:", e);
+            }
+        }
+
         function handleFeaturesClick() {
             if (userData.featuresLockedUntil && userData.featuresLockedUntil.toDate() > new Date()) {
                 const unlockTime = userData.featuresLockedUntil.toDate().toLocaleTimeString('en-US');
