@@ -1775,7 +1775,7 @@
             const supportContainer = document.getElementById('support-channels-list');
             supportContainer.innerHTML = getLoadingHTML();
             try {
-                const q = query(collection(db, "support_channels"), where("isActive", "==", true), orderBy("order"));
+                const q = query(collection(db, "support_channels"));
                 const snapshot = await getDocs(q);
                 if (snapshot.empty) {
                     supportContainer.innerHTML = '<p class="text-center text-gray-600">দুঃখিত, এই মুহূর্তে কোনো সাপোর্ট চ্যানেল উপলব্ধ নেই।</p>';
