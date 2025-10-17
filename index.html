@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USED MAIL SHOP</title>
-    
+    <title>MAIL STORE</title>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
+        body {
+            font-family: 'Inter', sans-serif;
             background-color: #f8f8f8;
             color: #333333;
+            /* ব্যবহারকারী যেন টেক্সট সিলেক্ট করতে না পারে তার জন্য কোড */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Standard syntax */
+            -webkit-touch-callout: none; /* iOS Safari */
         }
-        .card-bg { 
+        /* ইনপুট এবং নির্দিষ্ট কিছু জায়গায় সিলেকশন চালু রাখার জন্য কোড */
+        input, textarea, #mail-details-content, #mail-purchase-history .font-mono {
+            -webkit-user-select: text; /* Safari */
+            -ms-user-select: text; /* IE 10+ */
+            user-select: text; /* Standard syntax */
+            -webkit-touch-callout: default;
+        }
+        .card-bg {
             background-color: #ffffff;
             border: 1px solid #e0e0e0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -31,23 +43,23 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .btn, .btn-gradient, .btn-outline-accent { 
-            transition: all 0.2s ease-in-out; 
-            transform: scale(1); 
+        .btn, .btn-gradient, .btn-outline-accent {
+            transition: all 0.2s ease-in-out;
+            transform: scale(1);
             border: none;
         }
         .btn:active, .btn-gradient:active, .btn-outline-accent:active { transform: scale(0.96); }
-        .btn-gradient { 
+        .btn-gradient {
             background-image: linear-gradient(to right, #007bff, #0056b3);
-            color: #ffffff; 
-            font-weight: bold; 
+            color: #ffffff;
+            font-weight: bold;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
         }
-        .btn-gradient:hover { 
+        .btn-gradient:hover {
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
             background-image: linear-gradient(to right, #0056b3, #007bff);
         }
-        .input-field { 
+        .input-field {
             background-color: #f0f0f0;
             border: 1px solid #cccccc;
             color: #333333;
@@ -62,7 +74,7 @@
         .main-page.active { display: flex; animation: fadeIn 0.5s ease-in-out; }
         .sub-page { display: none; }
         .sub-page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
-        
+
         .bottom-nav {
              border-top: 1px solid #e0e0e0;
              background-color: rgba(255, 255, 255, 0.9);
@@ -87,10 +99,10 @@
         .center-home-link { position: relative; transform: translateY(-20px) scale(1.1); background: rgba(0, 123, 255, 0.2); border: 1px solid rgba(0, 123, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4); transition: all 0.3s ease; color: #ffffff; }
         .center-home-link:hover { transform: translateY(-20px) scale(1.15); }
         .center-home-link .icon { width: 32px; height: 32px; color: #fff; }
-        .header { 
-            border-bottom: 1px solid #e0e0e0; 
+        .header {
+            border-bottom: 1px solid #e0e0e0;
             background: linear-gradient(to right, #ffffff, #f9f9f9);
-            backdrop-filter: blur(10px); 
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 1rem;
             position: sticky;
@@ -129,7 +141,7 @@
         #ads-container { height: 120px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
         .ad-slide { min-width: 100%; background-size: cover; background-position: center; }
         #ads-dots .dot { height: 6px; width: 6px; }
-        
+
         /* UPDATED Premium Loader Styles */
         #loader { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; transition: opacity 0.5s ease; }
         #loader .logo-container { animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards, breath 2.5s ease-in-out infinite 1s; }
@@ -138,7 +150,7 @@
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes breath { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        
+
         /* Tutorial Page */
         .video-container-16-9 { position: relative; padding-top: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background-color: #e0e0e0; }
         .video-container-16-9 iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
@@ -146,7 +158,7 @@
         /* Review Card */
         .review-card-new { background-color: #f9f9f9; border: 1px solid #eee; }
         .star-rating i { color: #facc15; }
-        
+
         /* PIN Modal */
         .pin-input {
             width: 40px; height: 50px; text-align: center; font-size: 1.5rem;
@@ -194,42 +206,7 @@
         .modal-close-btn:hover {
             background-color: #d1d5db;
         }
-        
-        /* NEW: Floating Action Button (FAB) Styles */
-        .fab-button {
-            position: fixed;
-            bottom: 90px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            z-index: 40;
-            transition: all 0.3s ease;
-            transform: scale(0); /* Hidden by default */
-        }
-        .fab-button.visible {
-             transform: scale(1);
-        }
-        .fab-button:active {
-            transform: scale(0.95) !important;
-        }
-        .fab-updates {
-            left: 20px;
-            background-color: #25D366;
-        }
-        .fab-telegram {
-            right: 20px;
-            background-color: #0088cc;
-        }
-        .fab-whatsapp {
-            right: 20px;
-            background: linear-gradient(to bottom right, #25d366, #128c7e);
-        }
-        
+
         /* NEW: Premium Title Style */
         .premium-title {
             background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
@@ -255,31 +232,64 @@
             justify-content: center;
             border: 2px solid white;
         }
-        
-        /* NEW: Support Page Styles */
+
+        /* --- NEW: Slide-Out Menu Styles --- */
+        #menu-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 80;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        #slide-out-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 80%;
+            max-width: 320px;
+            background: #ffffff;
+            z-index: 90;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        #slide-out-menu.open {
+            transform: translateX(0);
+        }
+        .menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
         .support-link-card {
             display: flex;
             align-items: center;
             gap: 16px;
-            background-color: #ffffff;
             padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
             text-decoration: none;
             color: #111827;
             font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
             transition: all 0.2s ease-in-out;
         }
         .support-link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
-            border-color: #007bff;
+            background-color: #f9fafb;
+            color: #007bff;
         }
-        .support-link-card img {
-            width: 40px;
-            height: 40px;
+        .support-link-card img, .support-link-card .icon-placeholder {
+            width: 32px;
+            height: 32px;
         }
     </style>
 </head>
@@ -290,30 +300,49 @@
             <div class="logo-container">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#007bff] mx-auto"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </div>
-            <h1 class="text-accent-gradient loader-text mt-4">USED MAIL SHOP</h1>
+            <h1 class="text-accent-gradient loader-text mt-4">MAIL STORE</h1>
         </div>
         <div id="loader-reviews">"খুবই বিশ্বস্ত একটি সাইট।" - মোঃ রায়হান</div>
     </div>
 
+    <div id="menu-overlay"></div>
+    <aside id="slide-out-menu">
+        <div class="menu-header">
+            <h2 class="text-xl font-bold text-accent-gradient">Support Center</h2>
+            <p class="text-sm text-gray-500 mt-1">যেকোনো প্রয়োজনে যোগাযোগ করুন</p>
+        </div>
+        <nav id="support-channels-list" class="flex-grow overflow-y-auto">
+            </nav>
+        <div class="p-4 text-center text-xs text-gray-400 border-t">
+            MAIL STORE &copy; 2025
+        </div>
+    </aside>
     <div id="app-container" class="min-h-screen flex-col main-page">
+        <!-- =========== HEADER (UPDATED) =========== -->
         <header class="header flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <div class="relative">
+                    <img id="header-profile-pic" class="w-12 h-12 rounded-full border-2 border-blue-300 object-cover hidden" src="" alt="Profile Picture">
+                    <div id="header-initials-avatar" class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center border-2 border-blue-300"><span id="header-initials" class="text-xl font-bold text-gray-500"></span></div>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-accent-gradient">USED MAIL SHOP</h1>
+                    <h1 id="header-welcome-name" class="text-lg font-bold text-gray-800">Welcome!</h1>
                     <p id="header-balance-display" class="font-semibold text-gray-700 text-sm">৳0.00</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
                 <button id="header-deposit-btn" class="btn-gradient px-4 py-2 rounded-full text-sm font-bold shadow-lg">Deposit</button>
                 <button id="notification-btn" class="relative p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                     <i data-lucide="bell" class="w-5 h-5 text-gray-700"></i>
                     <span id="notification-badge" class="notification-badge hidden">0</span>
                 </button>
+                <button id="hamburger-menu-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5 text-gray-700"></i>
+                </button>
             </div>
         </header>
+        <!-- =========== END OF HEADER =========== -->
+
 
         <main class="flex-grow pb-20">
             <div id="home-page" class="space-y-6 sub-page">
@@ -336,7 +365,7 @@
                             <button id="home-deposit-btn" class="btn-gradient px-6 py-2 rounded-lg">Deposit</button>
                         </div>
                     </div>
-                    
+
                     <div id="ads-section">
                         <h2 class="text-xl font-bold px-2 mb-3 premium-title">✨ Promotions</h2>
                         <div id="ads-container" class="relative w-full overflow-hidden rounded-xl">
@@ -350,7 +379,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="pay-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-xl font-bold text-center text-gray-800">Pay Center</h2>
                 <div class="card-bg p-5 rounded-xl space-y-5">
@@ -361,10 +390,10 @@
                         </div>
                         <p class="text-lg font-semibold text-gray-700 mb-4 text-center p-3 rounded-lg border border-dashed border-blue-500/50 bg-blue-500/10">নিচের নাম্বারে <span class="text-blue-600 animate-pulse">সেন্ডমানি</span> করুন</p>
                         <div class="grid grid-cols-2 gap-3 mb-5">
-                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/Jh9s6jWw/20250922-113350.png" alt="Nagad" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">নগদ</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">01707933785</p><button onclick="copyToClipboard('01707933785', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
-                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/tCwGVkdH/20250922-113514.png" alt="bKash" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">বিকাশ</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">01707933785</p><button onclick="copyToClipboard('01707933785', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
-                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/htsw10Tj/20250922-113924.png" alt="Rocket" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">রকেট</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">01707933785</p><button onclick="copyToClipboard('01707933785', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
-                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/L6LFLfxY/20250922-113752.png" alt="Binance Pay" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">Binance Pay</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">1157828441</p><button onclick="copyToClipboard('1157828441', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy ID</span></button></div>
+                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/Jh9s6jWw/20250922-113350.png" alt="Nagad" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">নগদ</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">01864260513</p><button onclick="copyToClipboard('01864260513', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
+                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/tCwGVkdH/20250922-113514.png" alt="bKash" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">বিকাশ</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">01827750260</p><button onclick="copyToClipboard('01827750260', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
+                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/htsw10Tj/20250922-113924.png" alt="Rocket" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">রকেট</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">018277502604</p><button onclick="copyToClipboard('018277502604', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button></div>
+                            <div class="bg-gray-100 p-3 rounded-lg text-center"><img src="https://i.postimg.cc/L6LFLfxY/20250922-113752.png" alt="Binance Pay" class="w-10 h-10 rounded-full mx-auto mb-2"><p class="font-bold text-md">Binance Pay</p><p class="text-gray-600 font-mono tracking-wider text-sm my-1">Coming soon..</p><button onclick="copyToClipboard('Coming soon..', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy ID</span></button></div>
                         </div>
                         <p class="text-sm text-gray-600 mb-4 text-center border-t border-gray-300 pt-4">টাকা পাঠানোর পর নিচের ফর্মটি পূরণ করুন:</p>
                         <div class="space-y-4">
@@ -382,22 +411,21 @@
             <div id="mail-page" class="sub-page">
                  <div class="marquee mt-4">
                     <p class="marquee-content">
-💌 USED MAIL SHOP-এ আপনাকে স্বাগতম!
+💌 MAIL STORE-এ আপনাকে স্বাগতম!
 ✨ আমাদের সব সার্ভিস এখন চালু!
 📩 এখানে পাবেন ১০০% ভালো কোয়ালিটির মেইল।
 ⚡ কোনো সমস্যা হলে আমরা সঙ্গে সঙ্গে সমাধান করি।
 🕐 আমরা ২৪ ঘণ্টা সার্ভিস দিয়ে থাকি।
 💬 যেকোনো প্রয়োজনে যোগাযোগ করুন আমাদের সাপোর্ট টিমের সাথে।
-💎 USED MAIL SHOP — বিশ্বাস, গুণমান ও সাপোর্টের প্রতীক!                        
+💎 MAIL STORE — বিশ্বাস, গুণমান ও সাপোর্টের প্রতীক!
                     </p>
                 </div>
                 <div class="p-4 space-y-6">
-                    <h2 class="text-xl font-bold text-center text-gray-800">USED MAIL SHOP</h2>
                     <p class="text-gray-600 text-center mb-4">কম দামে এবং সহজে মেইল কিনুন</p>
                     <div id="mail-list" class="space-y-4"></div>
                      <div>
                         <div class="flex justify-between items-center mb-3 mt-6">
-                            <h3 class="text-lg font-semibold">Buy History</h3>
+                            <h3 class="text-lg font-semibold">Buy History (Last 4 Hours)</h3>
                             <div class="flex items-center gap-2">
                                <button id="copy-history-btn" class="btn-outline-accent p-2 rounded-lg text-sm flex items-center gap-1"><i data-lucide="copy" class="w-4 h-4"></i><span>Copy Now</span></button>
                                <button id="download-history-btn" class="btn-outline-accent p-2 rounded-lg text-sm flex items-center gap-1"><i data-lucide="download" class="w-4 h-4"></i><span>Download</span></button>
@@ -411,13 +439,13 @@
             <div id="updates-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-xl font-bold text-center text-gray-800">Update</h2>
                 <div id="updates-content" class="space-y-4"></div>
-                
+
                 <div class="mt-8">
                     <h3 class="text-lg font-semibold text-center mb-4 text-gray-800">Customer Reviews</h3>
                     <div id="reviews-list" class="space-y-4"></div>
                 </div>
             </div>
-            
+
             <div id="tutorial-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-xl font-bold text-center text-gray-800">Tutorials</h2>
                 <p class="text-sm text-gray-600 text-center">নিচের তালিকা থেকে আপনার প্রয়োজনীয় ভিডিওটি দেখুন।</p>
@@ -440,32 +468,23 @@
                         <span>⚡ More Features</span>
                         <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
                     </button>
-                    <button id="go-to-support-btn" class="w-full p-4 rounded-xl flex justify-between items-center text-left text-lg font-bold btn-gradient shadow-lg">
+                    <!-- =========== SUPPORT BUTTON (UPDATED) =========== -->
+                    <button id="go-to-support-btn" class="w-full card-bg p-4 rounded-xl flex justify-between items-center text-left text-lg font-semibold">
                         <span class="flex items-center gap-3">
-                            <i data-lucide="headphones" class="w-6 h-6"></i>
+                            <i data-lucide="headphones" class="w-6 h-6 text-gray-600"></i>
                             <span>Support Team</span>
                         </span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
                     </button>
+                    <!-- =========== END OF SUPPORT BUTTON =========== -->
                 </div>
+
 
                 <div class="text-center pt-6">
                      <p class="text-center text-gray-600 text-sm">Developed by <a href="https://t.me/bd_Storebot/Botshop" target="_blank" class="font-semibold text-[#007bff] hover:underline">𝐁𝐃 𝐒𝐓𝐎𝐑𝐄</a></p>
                 </div>
             </div>
 
-            <div id="support-page" class="p-4 space-y-4 sub-page">
-                <div class="relative flex items-center justify-center mb-4">
-                    <button onclick="navigateTo('profile-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                    </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">Support Center</h2>
-                </div>
-                <p class="text-center text-gray-600 text-sm">যেকোনো প্রয়োজনে নিচের মাধ্যমগুলোতে যোগাযোগ করুন।</p>
-                <div id="support-channels-list" class="space-y-3">
-                    </div>
-            </div>
-            
             <div id="features-page" class="p-4 space-y-8 sub-page">
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <div class="card-bg p-4 rounded-xl">
@@ -512,7 +531,7 @@
                     <button id="add-mails-btn" class="w-full p-3 rounded-lg btn-gradient">Add Mails to Stock</button>
                 </div>
             </div>
-            
+
             <div id="recharge-page" class="p-4 space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4">
                     <button onclick="navigateTo('features-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -563,7 +582,7 @@
                     <div id="recharge-history-list" class="space-y-3"></div>
                 </div>
             </div>
-            
+
             <div id="send-page" class="p-4 space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4">
                     <button onclick="navigateTo('features-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -595,23 +614,13 @@
 
         <nav class="bottom-nav">
             <a href="#" class="nav-link-premium" data-page="updates-page"><i data-lucide="bell" class="icon"></i><span>Updates</span></a>
-            <a href="#" class="nav-link-premium" data-page="tutorial-page"><i data-lucide="video" class="icon"></i><span>Tutorial</span></a>            
+            <a href="#" class="nav-link-premium" data-page="tutorial-page"><i data-lucide="video" class="icon"></i><span>Tutorial</span></a>
             <a href="#" class="nav-link-premium center-home-link active" data-page="home-page"><i data-lucide="home" class="icon"></i></a>
-            <a href="#" class="nav-link-premium" data-page="mail-page"><i data-lucide="mail" class="icon"></i><span>Mail</span></a>            
+            <a href="#" class="nav-link-premium" data-page="mail-page"><i data-lucide="mail" class="icon"></i><span>Mail</span></a>
             <a href="#" class="nav-link-premium" data-page="profile-page"><i data-lucide="user" class="icon"></i><span>Profile</span></a>
             <a href="#" id="admin-nav-link" class="nav-link-premium hidden" data-page="admin-page"><i data-lucide="shield" class="icon"></i><span>Admin</span></a>
         </nav>
     </div>
-    
-    <a id="fab-updates-plus" href="https://t.me/ownersofceo01" target="_blank" class="fab-button fab-updates">
-        <i data-lucide="plus" class="w-8 h-8"></i>
-    </a>
-    <a id="fab-common-telegram" href="https://t.me/earn_Supportbot" target="_blank" class="fab-button fab-telegram">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.65 12c-.88-.25-.89-1.02.2-1.3l15.67-6.11c.8-.32 1.45.19 1.18 1.1l-2.53 11.64c-.23.95-1.17 1.17-1.87.73l-4.5-3.33-2.15 2.07c-.24.24-.45.46-.8.46-.42 0-.59-.16-.69-.53z"/></svg>
-    </a>
-    <a id="fab-features-whatsapp" href="https://wa.me/8801707933785" target="_blank" class="fab-button fab-whatsapp">
-         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 20.12c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.38 0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24zm4.52-6.14c-.25-.12-1.47-.72-1.7-.82s-.39-.12-.56.12c-.17.25-.64.82-.79.98-.15.17-.29.19-.54.06-.25-.12-1.06-.39-2.02-1.24-.75-.66-1.25-1.48-1.4-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07s.88 2.4 1 2.56c.12.17 1.75 2.67 4.24 3.73.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18s-.25-.11-.5-.24z"/></svg>
-    </a>
 
     <div id="custom-alert" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
         <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center border border-gray-200 text-gray-800">
@@ -690,7 +699,7 @@
             <button id="mail-details-ok-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">Got It!</button>
         </div>
     </div>
-    
+
     <div id="insufficient-balance-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
         <div class="card-bg rounded-2xl p-6 w-full max-w-sm text-center space-y-4 relative">
             <button id="close-insufficient-balance-modal" class="modal-close-btn">
@@ -705,19 +714,44 @@
         </div>
     </div>
 
+    <!-- UPDATED: Purchase Success Modal -->
+    <div id="purchase-success-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
+        <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4 relative">
+            <button id="close-purchase-success-modal" class="modal-close-btn">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <i data-lucide="check-circle-2" class="w-12 h-12 text-green-500 mx-auto"></i>
+            <h3 class="text-xl font-bold text-gray-800 text-center">সফলভাবে কেনা হয়েছে!</h3>
+            
+            <div class="space-y-3 pt-2">
+                <div class="flex items-center justify-between bg-gray-100 p-2.5 rounded-lg">
+                    <span class="font-mono text-sm text-gray-800 truncate" id="purchase-success-email"></span>
+                    <button onclick="copyToClipboard(document.getElementById('purchase-success-email').textContent, this)" class="ml-2 p-2 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-100 p-2.5 rounded-lg">
+                    <span class="font-mono text-sm text-gray-800" id="purchase-success-password"></span>
+                    <button onclick="copyToClipboard(document.getElementById('purchase-success-password').textContent, this)" class="ml-2 p-2 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center pt-2">এই তথ্য আপনার ক্রয় হিস্টিতে (শেষ ৪ ঘণ্টা) সেভ করা হয়েছে।</p>
+            <button id="purchase-success-buy-again-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">আবার কিনুন</button>
+        </div>
+    </div>
+
 
     <script type="module">
-        const ADMIN_UID = "6954647230";
-const firebaseConfig = {
-  apiKey: "AIzaSyAEV4zkuTcRYIFP2AMmKJTyDUTzSYLnbbM",
-  authDomain: "used-mail-shop.firebaseapp.com",
-  databaseURL: "https://used-mail-shop-default-rtdb.firebaseio.com",
-  projectId: "used-mail-shop",
-  storageBucket: "used-mail-shop.firebasestorage.app",
-  messagingSenderId: "251382358623",
-  appId: "1:251382358623:web:a567a9349d1fd87277b1ea"
-};
-        
+        const ADMIN_UID = "CUb4r6eg1RV6Ljkj5U2V1cSswng1";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoCy08FL_sHHdA0f2cJg0BaF-iYAhFuk0",
+            authDomain: "mail-store-4692b.firebaseapp.com",
+            databaseURL: "https://mail-store-4692b-default-rtdb.firebaseio.com",
+            projectId: "mail-store-4692b",
+            storageBucket: "mail-store-4692b.firebasestorage.app",
+            messagingSenderId: "264936867411",
+            appId: "1:264936867411:web:5933919e5bafae617968a6"
+        };
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, serverTimestamp, query, where, getDocs, orderBy, limit, runTransaction, getCountFromServer, writeBatch, updateDoc, Timestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
@@ -727,10 +761,10 @@ const firebaseConfig = {
         let currentUserTg = null;
         let userData = null;
         let appConfig = {};
-        let insufficientBalanceInterval = null; 
-        
+        let insufficientBalanceInterval = null;
+
         const loader = document.getElementById('loader');
-        
+
         const getLoadingHTML = () => `<div class="loading-container"><div class="premium-loader-spinner"></div></div>`;
 
         window.onload = async () => {
@@ -744,18 +778,18 @@ const firebaseConfig = {
                     loader.style.display = 'none';
                     return;
                 }
-            } catch (e) { 
-                console.error("Telegram WebApp script failed to initialize or user data not available.", e); 
+            } catch (e) {
+                console.error("Telegram WebApp script failed to initialize or user data not available.", e);
                 showAlert("Error initializing Telegram Mini App. Please try again from Telegram.");
                 loader.style.display = 'none';
                 return;
             }
             lucide.createIcons();
             setupEventListeners();
-            setupBanner(); 
-            
+            setupBanner();
+
             await initUserSession();
-            
+
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.style.display = 'none';
@@ -794,12 +828,12 @@ const firebaseConfig = {
                 userData = userSnap.data();
             } else {
                 const userName = `${currentUserTg.first_name || ''} ${currentUserTg.last_name || ''}`.trim() || `User ${tgChatId}`;
-                userData = { 
+                userData = {
                     tgChatId: tgChatId,
                     name: userName,
                     username: currentUserTg.username || null,
-                    balance: 0, 
-                    createdAt: serverTimestamp(), 
+                    balance: 0,
+                    createdAt: serverTimestamp(),
                     isBlocked: false,
                     pin: null,
                     pinFailAttempts: [],
@@ -815,10 +849,12 @@ const firebaseConfig = {
             }
 
             await fetchAppConfig();
-            
+
             if (tgChatId === ADMIN_UID) {
                 document.getElementById('admin-nav-link').classList.remove('hidden');
             }
+
+            loadSupportMenu();
             updateUI();
             listenForNotifications();
             showMainPage('app-container');
@@ -830,13 +866,41 @@ const firebaseConfig = {
             const configSnap = await getDoc(configRef);
             appConfig = configSnap.exists() ? configSnap.data() : { mails: [] };
         }
-        
+
+        // =========== JAVASCRIPT FOR HEADER (UPDATED) ===========
+        function updateHeaderUI() {
+            if (!currentUserTg) return;
+
+            const profilePic = document.getElementById('header-profile-pic');
+            const avatarDiv = document.getElementById('header-initials-avatar');
+            const welcomeName = document.getElementById('header-welcome-name');
+
+            // Update profile picture/initials
+            if (currentUserTg.photo_url) {
+                profilePic.src = currentUserTg.photo_url;
+                profilePic.classList.remove('hidden');
+                avatarDiv.classList.add('hidden');
+            } else {
+                const initials = (currentUserTg.first_name?.[0] || '') + (currentUserTg.last_name?.[0] || '');
+                document.getElementById('header-initials').textContent = initials.toUpperCase();
+                profilePic.classList.add('hidden');
+                avatarDiv.classList.remove('hidden');
+            }
+
+            // Update welcome name
+            const firstName = currentUserTg.first_name || 'User';
+            welcomeName.textContent = `Hi, ${firstName}!`;
+        }
+
         function updateUI() {
             if (!userData) return;
             const balance = (userData.balance || 0).toFixed(2);
             document.getElementById('balance-display').textContent = `৳${balance}`;
             document.getElementById('header-balance-display').textContent = `৳${balance}`;
+            updateHeaderUI(); // Call the new header update function
         }
+        // =========== END OF JAVASCRIPT FOR HEADER ===========
+
 
         function showMainPage(pageId) {
             document.querySelectorAll('.main-page').forEach(p => p.classList.remove('active'));
@@ -855,10 +919,6 @@ const firebaseConfig = {
                 link.classList.toggle('active', link.dataset.page === pageId);
             });
 
-            document.getElementById('fab-updates-plus').classList.toggle('visible', pageId === 'updates-page');
-            document.getElementById('fab-common-telegram').classList.toggle('visible', pageId === 'home-page' || pageId === 'mail-page');
-            document.getElementById('fab-features-whatsapp').classList.toggle('visible', pageId === 'features-page');
-            
             const pageLoadFunctions = {
                 'home-page': loadHomePageAds,
                 'pay-page': loadPaymentHistory,
@@ -868,9 +928,8 @@ const firebaseConfig = {
                 'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
                 'tutorial-page': loadTutorials,
-                'support-page': loadSupportPage, // New page loader
-                'recharge-page': () => { 
-                    loadRechargeHistory(); 
+                'recharge-page': () => {
+                    loadRechargeHistory();
                     setupDynamicAmountHandlers('recharge');
                 },
                 'send-page': () => {
@@ -881,6 +940,13 @@ const firebaseConfig = {
             lucide.createIcons();
         }
         window.navigateTo = navigateTo;
+
+        function toggleMenu() {
+            const menu = document.getElementById('slide-out-menu');
+            const overlay = document.getElementById('menu-overlay');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
 
         function setupEventListeners() {
             document.querySelectorAll('.nav-link-premium[data-page]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); navigateTo(link.dataset.page); }));
@@ -894,22 +960,20 @@ const firebaseConfig = {
             document.getElementById('copy-history-btn').addEventListener('click', handleCopyHistory);
             document.getElementById('deposit-details-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.remove('hidden'));
             document.getElementById('deposit-details-ok-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.add('hidden'));
-
+            document.getElementById('hamburger-menu-btn').addEventListener('click', toggleMenu);
+            document.getElementById('menu-overlay').addEventListener('click', toggleMenu);
+            document.getElementById('go-to-support-btn').addEventListener('click', toggleMenu);
             document.getElementById('more-features-btn').addEventListener('click', handleFeaturesClick);
-            document.getElementById('go-to-support-btn').addEventListener('click', () => navigateTo('support-page')); // Updated support button
-            
             document.getElementById('features-deposit-btn').addEventListener('click', () => navigateTo('pay-page'));
             document.getElementById('features-recharge-btn').addEventListener('click', () => navigateTo('recharge-page'));
             document.getElementById('features-receive-btn').addEventListener('click', handleReceive);
             document.getElementById('features-send-btn').addEventListener('click', () => navigateTo('send-page'));
             document.getElementById('submit-recharge-btn').addEventListener('click', handleRechargeRequest);
             document.getElementById('submit-send-btn').addEventListener('click', handleSendRequest);
-            
             document.getElementById('set-pin-btn').addEventListener('click', handleSetPin);
             document.getElementById('enter-pin-btn').addEventListener('click', handleEnterPin);
             document.getElementById('cancel-pin-set-btn').addEventListener('click', () => document.getElementById('pin-set-modal').classList.add('hidden'));
             document.getElementById('cancel-pin-enter-btn').addEventListener('click', () => document.getElementById('pin-enter-modal').classList.add('hidden'));
-
             document.getElementById('mail-details-ok-btn').addEventListener('click', () => {
                 document.getElementById('mail-details-modal').classList.add('hidden');
             });
@@ -923,8 +987,12 @@ const firebaseConfig = {
             document.getElementById('alert-ok-btn').addEventListener('click', () => {
                  document.getElementById('custom-alert').classList.add('hidden');
             });
+            // MODIFIED: Event listeners for the new purchase success modal
+            const hidePurchaseSuccessModal = () => document.getElementById('purchase-success-modal').classList.add('hidden');
+            document.getElementById('purchase-success-buy-again-btn').addEventListener('click', hidePurchaseSuccessModal);
+            document.getElementById('close-purchase-success-modal').addEventListener('click', hidePurchaseSuccessModal);
         }
-        
+
         function listenForNotifications() {
             const q = query(collection(db, "notifications"), orderBy("createdAt", "desc"));
             onSnapshot(q, (snapshot) => {
@@ -936,7 +1004,7 @@ const firebaseConfig = {
                         unreadCount++;
                     }
                 });
-                
+
                 const badge = document.getElementById('notification-badge');
                 if (unreadCount > 0) {
                     badge.textContent = unreadCount;
@@ -946,7 +1014,7 @@ const firebaseConfig = {
                 }
             });
         }
-        
+
         async function showNotifications() {
             const modal = document.getElementById('notification-modal');
             const listEl = document.getElementById('notification-list');
@@ -970,7 +1038,7 @@ const firebaseConfig = {
                 }).join('');
             }
         }
-        
+
         async function hideNotifications() {
             document.getElementById('notification-modal').classList.add('hidden');
             const userRef = doc(db, "users", userData.tgChatId);
@@ -983,7 +1051,7 @@ const firebaseConfig = {
         function loadProfilePage() {
             const profilePic = document.getElementById('profile-pic');
             const avatarDiv = document.getElementById('profile-initials-avatar');
-            
+
             if (currentUserTg) {
                 if (currentUserTg.photo_url) {
                     profilePic.src = currentUserTg.photo_url;
@@ -1007,10 +1075,10 @@ const firebaseConfig = {
             const senderNumber = document.getElementById('sender-number').value.trim();
             const transactionId = document.getElementById('deposit-txid').value.trim();
             if (!method || !amount || amount <= 0 || !senderNumber || !transactionId) return showAlert("অনুগ্রহ করে সমস্ত তথ্য সঠিকভাবে পূরণ করুন।");
-            
+
             loader.style.opacity = '1';
             loader.style.display = 'flex';
-            
+
             try {
                 const depositQuery = query(collection(db, "deposits"), where("transactionId", "==", transactionId), where("status", "in", ["pending", "approved"]));
                 const querySnapshot = await getDocs(depositQuery);
@@ -1082,8 +1150,9 @@ const firebaseConfig = {
             const historyListEl = document.getElementById('mail-purchase-history');
             mailListEl.innerHTML = getLoadingHTML();
             historyListEl.innerHTML = getLoadingHTML();
-            
+
             try {
+                // Load Mail Store Items
                 const stockPromises = (appConfig.mails || []).map(mail => getStockCount(mail.stockKey));
                 const stockCounts = await Promise.all(stockPromises);
                 let mailsWithStock = (appConfig.mails || []).map((mail, index) => ({ ...mail, stock: stockCounts[index] }));
@@ -1098,16 +1167,24 @@ const firebaseConfig = {
                     const buyButtonDisabled = isOutOfStock || insufficientBalance ? 'disabled' : '';
                     const buyButtonClasses = isOutOfStock || insufficientBalance ? 'bg-gray-400 cursor-not-allowed' : 'btn-gradient';
                     const validityTagHtml = (mail.expirationDays !== undefined && mail.expirationDays !== null) ? `<span class="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">${mail.expirationDays} h</span>` : '';
-                    
+
                     const apiButtonHtml = mail.apiLink ? `<button onclick="openApiLink('${mail.apiLink}')" class="text-blue-600 font-semibold">API</button>` : '<span class="text-gray-400 font-semibold">API</span>';
 
                     mailListEl.innerHTML += `<div class="card-bg p-4 rounded-xl space-y-3"><div class="flex justify-between items-center"><div class="flex items-center gap-3"><img src="${mail.logoUrl}" class="w-8 h-8 rounded-lg object-cover" alt="${mail.type} logo"><h3 class="font-bold text-lg text-gray-800">${mail.type}</h3></div><div class="flex items-center gap-2">${validityTagHtml}<button onclick="showMailDetails('${mail.type}', '${mail.details.replace(/'/g, "\\'")}')" class="text-blue-600 text-sm font-semibold">Details</button></div></div><div class="grid grid-cols-3 text-center items-center pt-2 border-t border-gray-200"><div class="py-2">${apiButtonHtml}</div><div class="py-2"><p class="text-gray-500 text-sm">Price</p><p class="font-bold text-lg text-blue-600">৳${costInBdt.toFixed(2)}</p></div><div class="py-2"><p class="text-gray-500 text-sm">Stock</p><p class="font-bold text-lg text-green-600">${stock}</p></div></div><button class="${buyButtonClasses} w-full py-2 rounded-lg text-md" ${buyButtonDisabled} onclick="buyMail('${mail.type}', ${costInBdt}, '${mail.stockKey}')">Buy Now</button></div>`;
                 });
+                
+                // MODIFIED: Load Purchase History from the last 4 hours only
+                const fourHoursAgo = Timestamp.fromDate(new Date(Date.now() - 4 * 60 * 60 * 1000));
+                const q = query(
+                    collection(db, "mail_purchases"), 
+                    where("userId", "==", userData.tgChatId), 
+                    where("purchasedAt", ">=", fourHoursAgo),
+                    orderBy("purchasedAt", "desc")
+                );
 
-                const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), orderBy("purchasedAt", "desc"));
                 const querySnapshot = await getDocs(q);
                 if(querySnapshot.empty) {
-                    historyListEl.innerHTML = '<p class="text-center text-gray-600">আপনি এখনো কোনো মেইল কিনেননি।</p>';
+                    historyListEl.innerHTML = '<p class="text-center text-gray-600">আপনি শেষ ৪ ঘণ্টায় কোনো মেইল কিনেননি।</p>';
                 } else {
                     historyListEl.innerHTML = querySnapshot.docs.map(doc => {
                         const purchase = doc.data();
@@ -1119,7 +1196,7 @@ const firebaseConfig = {
                                 <div>
                                     <h4 class="font-bold text-lg text-gray-800">${purchase.mailType}</h4>
                                     <p class="text-xs text-gray-500">${date}</p>
-                                    <p class="text-xs font-mono text-blue-600 mt-1">ID: ${purchase.saleId || 'N/A'}</p> 
+                                    <p class="text-xs font-mono text-blue-600 mt-1">ID: ${purchase.saleId || 'N/A'}</p>
                                 </div>
                                 <button onclick="copyToClipboard('${fullData}', this)" class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-md font-semibold hover:bg-gray-200 flex items-center gap-1">
                                     <i data-lucide="copy-plus" class="w-3 h-3"></i> FULL COPY
@@ -1140,7 +1217,7 @@ const firebaseConfig = {
                         </div>`;
                     }).join('');
                 }
-                
+
                 lucide.createIcons();
 
                 if (insufficientBalanceInterval) {
@@ -1165,7 +1242,7 @@ const firebaseConfig = {
                  console.error(e);
             }
         }
-        
+
         let adInterval = null;
         function loadHomePageAds() {
             const adsConfig = appConfig.ads;
@@ -1174,7 +1251,7 @@ const firebaseConfig = {
             const dotsContainer = document.getElementById('ads-dots');
 
             if (adsConfig && adsConfig.enabled && adsConfig.items && adsConfig.items.length > 0) {
-                innerContainer.innerHTML = ''; 
+                innerContainer.innerHTML = '';
                 adsConfig.items.forEach(ad => {
                     const slide = document.createElement('a');
                     slide.href = ad.linkUrl;
@@ -1184,7 +1261,7 @@ const firebaseConfig = {
                     innerContainer.appendChild(slide);
                 });
             }
-            
+
             const slides = innerContainer.querySelectorAll('.ad-slide');
             if(slides.length === 0) {
                 adsSection.classList.add('hidden');
@@ -1199,7 +1276,7 @@ const firebaseConfig = {
                 dot.dataset.index = index;
                 dotsContainer.appendChild(dot);
             });
-            
+
             let currentIndex = 0;
             const dots = dotsContainer.querySelectorAll('.dot');
             const intervalTime = (adsConfig?.intervalSeconds || 5) * 1000;
@@ -1220,7 +1297,7 @@ const firebaseConfig = {
                     showAd(parseInt(e.target.dataset.index));
                 }
             });
-            
+
             if (adInterval) clearInterval(adInterval);
             if (slides.length > 1) {
                 adInterval = setInterval(() => {
@@ -1234,49 +1311,47 @@ const firebaseConfig = {
             try {
                 const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), orderBy("purchasedAt", "desc"));
                 const querySnapshot = await getDocs(q);
-                if (querySnapshot.empty) { 
+                if (querySnapshot.empty) {
                     loader.style.display = 'none';
-                    return showAlert("আপনার কোনো History নেই"); 
+                    return showAlert("আপনার কোনো History নেই");
                 }
-                
+
                 const dataForExcel = querySnapshot.docs.map(doc => { const p = doc.data(); return { 'Purchase Date': p.purchasedAt.toDate().toLocaleString(), 'Mail Type': p.mailType, 'Email': p.mail, 'Password': p.password || 'N/A', 'Cost (BDT)': p.cost, 'Full Data': [p.mail,p.password,p.refreshToken,p.clientId].filter(Boolean).join('|') }; });
                 const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
                 const workbook = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(workbook, worksheet, "Purchase History");
                 worksheet['!cols'] = [ {wch: 22}, {wch: 20}, {wch: 30}, {wch: 30}, {wch: 15}, {wch: 70} ];
                 XLSX.writeFile(workbook, "My_Purchase_History.xlsx");
-            } catch (error) { showAlert("ইতিহাস ডাউনলোড করার সময় একটি সমস্যা হয়েছে।"); } 
+            } catch (error) { showAlert("ইতিহাস ডাউনলোড করার সময় একটি সমস্যা হয়েছে।"); }
             finally { loader.style.display = 'none'; }
         }
-        
+
+        // MODIFIED: handleCopyHistory now copies only recent (4 hours) purchases in the new format
         async function handleCopyHistory() {
              loader.style.display = 'flex';
             try {
-                const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), orderBy("purchasedAt", "desc"));
+                const fourHoursAgo = new Date(Date.now() - 4 * 60 * 60 * 1000);
+                const q = query(
+                    collection(db, "mail_purchases"), 
+                    where("userId", "==", userData.tgChatId),
+                    where("purchasedAt", ">=", Timestamp.fromDate(fourHoursAgo)),
+                    orderBy("purchasedAt", "desc")
+                );
                 const querySnapshot = await getDocs(q);
                 if (querySnapshot.empty) {
                     loader.style.display = 'none';
-                    return showAlert("আপনার কোনো History নেই");
+                    return showAlert("শেষ ৪ ঘণ্টায় আপনার কোনো কেনাকাটার ইতিহাস নেই।");
                 }
-                
-                const header = "Purchase Date\tMail Type\tEmail\tPassword\tCost (BDT)\tFull Data";
+
                 const rows = querySnapshot.docs.map(doc => {
                     const p = doc.data();
-                    const fullData = [p.mail, p.password, p.refreshToken, p.clientId].filter(Boolean).join('|');
-                    return [
-                        p.purchasedAt.toDate().toLocaleString(),
-                        p.mailType,
-                        p.mail,
-                        p.password || 'N/A',
-                        p.cost,
-                        fullData
-                    ].join('\t');
+                    return `Mail Type: ${p.mailType}\nEmail: ${p.mail}\nPassword: ${p.password || 'N/A'}`;
                 });
-                
-                const tsvContent = [header, ...rows].join('\n');
-                copyToClipboard(tsvContent);
 
-            } catch (error) { showAlert("ইতিহাস কপি করার সময় একটি সমস্যা হয়েছে।"); console.error(error); } 
+                const contentToCopy = rows.join('\n\n---\n\n');
+                copyToClipboard(contentToCopy, null, 'শেষ ৪ ঘণ্টার ইতিহাস কপি করা হয়েছে!');
+
+            } catch (error) { showAlert("ইতিহাস কপি করার সময় একটি সমস্যা হয়েছে।"); console.error(error); }
             finally { loader.style.display = 'none'; }
         }
 
@@ -1293,50 +1368,56 @@ const firebaseConfig = {
             try {
                 const purchasedMailData = await runTransaction(db, async (transaction) => {
                     const counterRef = doc(db, "counters", "mail_purchase");
-        
+
                     const q = query(collection(db, stockKey), where("isSold", "==", false), limit(1));
                     const mailQuerySnapshot = await getDocs(q);
-        
+
                     if (mailQuerySnapshot.empty) throw "দুঃখিত, এই ধরনের মেইল বর্তমানে স্টক শেষ।";
-                    
+
                     const mailDoc = mailQuerySnapshot.docs[0];
                     const mailData = mailDoc.data();
                     const userRef = doc(db, "users", userData.tgChatId);
-        
+
                     const [counterSnap, userSnap] = await Promise.all([
                         transaction.get(counterRef),
                         transaction.get(userRef)
                     ]);
-                    
+
                     if (!userSnap.exists() || userSnap.data().balance < cost) throw `অপর্যাপ্ত ব্যালেন্স।`;
                     if (!counterSnap.exists()) throw "Sale ID counter not found. Please setup 'counters/mail_purchase'.";
-        
+
                     const saleId = counterSnap.data().currentId;
                     transaction.update(counterRef, { currentId: saleId + 1 });
-        
+
                     transaction.update(userRef, { balance: userSnap.data().balance - cost });
                     transaction.update(mailDoc.ref, { isSold: true, soldTo: userData.tgChatId, soldAt: serverTimestamp() });
                     const purchaseLogRef = doc(collection(db, "mail_purchases"));
-                    
-                    transaction.set(purchaseLogRef, { 
+
+                    transaction.set(purchaseLogRef, {
                         saleId: saleId,
-                        userId: userData.tgChatId, 
-                        mailType: mailType, 
-                        mail: mailData.email, 
-                        password: mailData.password || null, 
+                        userId: userData.tgChatId,
+                        mailType: mailType,
+                        mail: mailData.email,
+                        password: mailData.password || null,
                         refreshToken: mailData.refresh_token || null,
                         clientId: mailData.client_id || null,
-                        cost: cost, 
-                        purchasedAt: serverTimestamp() 
+                        cost: cost,
+                        purchasedAt: serverTimestamp()
                     });
                     return mailData;
                 });
 
-                userData.balance -= cost; 
+                userData.balance -= cost;
                 updateUI();
-                showAlert(`সফলভাবে কেনা হয়েছে!\n\nEmail: ${purchasedMailData.email}\nPassword: ${purchasedMailData.password || 'N/A'}\n\nএই তথ্য আপনার ক্রয় হিস্টিতে সেভ করা হয়েছে।`);
-                loadMailStore(); 
-            } catch (e) { showAlert(typeof e === 'string' ? e : "কিনতে সমস্যা হয়েছে। আবার চেষ্টা করুন।"); } 
+                
+                // MODIFIED: Show the new success modal instead of the old alert
+                document.getElementById('purchase-success-email').textContent = purchasedMailData.email;
+                document.getElementById('purchase-success-password').textContent = purchasedMailData.password || 'N/A';
+                document.getElementById('purchase-success-modal').classList.remove('hidden');
+                lucide.createIcons();
+
+                loadMailStore();
+            } catch (e) { showAlert(typeof e === 'string' ? e : "কিনতে সমস্যা হয়েছে। আবার চেষ্টা করুন।"); }
             finally { loader.style.display = 'none'; }
         }
 
@@ -1345,7 +1426,7 @@ const firebaseConfig = {
             document.getElementById('mail-details-content').textContent = details;
             document.getElementById('mail-details-modal').classList.remove('hidden');
         }
-        
+
         async function loadUpdates() {
             const updatesContainer = document.getElementById('updates-content');
             updatesContainer.innerHTML = getLoadingHTML();
@@ -1353,24 +1434,24 @@ const firebaseConfig = {
                 const q = query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(1));
                 const snapshot = await getDocs(q);
                 if (snapshot.empty) return updatesContainer.innerHTML = `<div class="card-bg p-6 rounded-2xl text-center"><h3 class="font-bold text-xl text-gray-800">No new updates right now!</h3><p class="text-gray-600 mt-2">Check back later.</p></div>`;
-                
+
                 const updateDoc = snapshot.docs[0];
                 const updateData = updateDoc.data();
                 const updateId = updateDoc.id;
                 const userInteractionDoc = await getDoc(doc(db, "updates", updateId, "userInteractions", userData.tgChatId));
                 const userVote = userInteractionDoc.exists() ? userInteractionDoc.data().vote : null;
-                
+
                 const isLiked = userVote === 'liked';
                 const isDisliked = userVote === 'disliked';
                 let linkButtonHtml = updateData.linkUrl ? `<a href="${updateData.linkUrl}" target="_blank" class="btn-gradient px-4 py-2 rounded-lg text-sm flex-1 text-center">Learn More</a>` : '';
                 const createdAtDate = updateData.createdAt ? updateData.createdAt.toDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-                
+
                 updatesContainer.innerHTML = `<div class="card-bg rounded-2xl overflow-hidden shadow-lg flex flex-col">${updateData.imageUrl ? `<img src="${updateData.imageUrl}" class="w-full aspect-[16/9] object-cover" alt="Update Banner">` : ''}<div class="p-6 space-y-4 flex flex-col flex-grow"><div><h3 class="text-2xl font-bold text-gray-800">${updateData.title}</h3>${createdAtDate ? `<p class="text-xs text-gray-500 mt-1">${createdAtDate}</p>` : ''}</div><p class="text-gray-600 text-base whitespace-pre-wrap flex-grow leading-relaxed">${updateData.content || ''}</p><div class="flex items-center justify-between gap-4 pt-4 mt-auto border-t border-gray-200"><div class="flex items-center gap-4"><div class="flex items-center space-x-2"><button id="like-btn" class="p-2 rounded-full transition-colors ${isLiked ? 'text-blue-500 bg-blue-100' : 'text-gray-500 hover:bg-gray-100'}" ${isLiked || isDisliked ? 'disabled' : ''}><i data-lucide="thumbs-up" class="w-5 h-5"></i></button><span class="font-semibold text-sm text-gray-700">${updateData.likes || 0}</span></div><div class="flex items-center space-x-2"><button id="dislike-btn" class="p-2 rounded-full transition-colors ${isDisliked ? 'text-red-500 bg-red-100' : 'text-gray-500 hover:bg-gray-100'}" ${isLiked || isDisliked ? 'disabled' : ''}><i data-lucide="thumbs-down" class="w-5 h-5"></i></button><span class="font-semibold text-sm text-gray-700">${updateData.dislikes || 0}</span></div></div>${linkButtonHtml}</div></div></div>`;
                 lucide.createIcons();
                 document.getElementById('like-btn').onclick = () => handleVote('like', updateId);
                 document.getElementById('dislike-btn').onclick = () => handleVote('dislike', updateId);
-            } catch(e) { 
-                updatesContainer.innerHTML = `<p class="text-center text-red-600">Failed to load updates.</p>`; 
+            } catch(e) {
+                updatesContainer.innerHTML = `<p class="text-center text-red-600">Failed to load updates.</p>`;
                 console.error("Error loading updates:", e);
             }
         }
@@ -1390,7 +1471,7 @@ const firebaseConfig = {
                 });
                 showAlert("Your vote has been submitted successfully!");
                 loadUpdates();
-            } catch (e) { showAlert(e.message || "Failed to submit your vote."); } 
+            } catch (e) { showAlert(e.message || "Failed to submit your vote."); }
             finally { loader.style.display = 'none'; }
         }
 
@@ -1404,10 +1485,10 @@ const firebaseConfig = {
             const stockKey = document.getElementById('mail-type-select').value;
             const mailDataRaw = document.getElementById('mail-data-textarea').value;
             if (!stockKey || !mailDataRaw.trim()) return showAlert("Please select a mail type and provide mail data.");
-            
+
             const lines = mailDataRaw.trim().split('\n').filter(line => line.trim() !== '');
             if (lines.length === 0) return showAlert("No valid mail data found.");
-            
+
             loader.style.display = 'flex';
             try {
                 const batch = writeBatch(db);
@@ -1425,7 +1506,7 @@ const firebaseConfig = {
                     showAlert(`Successfully added ${addedCount} new mails to the stock.`);
                     document.getElementById('mail-data-textarea').value = '';
                 } else showAlert("No valid mails were found to add. Ensure the format is correct.");
-            } catch (error) { showAlert("An error occurred while adding mails."); } 
+            } catch (error) { showAlert("An error occurred while adding mails."); }
             finally { loader.style.display = 'none'; }
         }
 
@@ -1433,8 +1514,8 @@ const firebaseConfig = {
             document.getElementById('alert-message').innerText = message;
             document.getElementById('custom-alert').classList.remove('hidden');
         }
-        
-        window.copyToClipboard = function(text, element) {
+
+        window.copyToClipboard = function(text, element, alertMessage = 'কপি করা হয়েছে!') {
             if (!text || typeof text !== 'string') {
                 console.warn("Copy to clipboard called with invalid text:", text);
                 return;
@@ -1442,11 +1523,10 @@ const firebaseConfig = {
 
             const textArea = document.createElement("textarea");
             textArea.value = text.trim();
-
             textArea.style.position = 'fixed';
             textArea.style.top = '-9999px';
             textArea.style.left = '-9999px';
-            
+
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
@@ -1460,7 +1540,7 @@ const firebaseConfig = {
                         lucide.createIcons();
                         setTimeout(() => { element.innerHTML = originalContent; lucide.createIcons(); }, 1500);
                     } else {
-                        showAlert('কপি করা হয়েছে!');
+                        showAlert(alertMessage);
                     }
                 } else {
                     showAlert('দুঃখিত, কপি করা যায়নি।');
@@ -1472,7 +1552,7 @@ const firebaseConfig = {
 
             document.body.removeChild(textArea);
         }
-        
+
         window.openApiLink = function(url) {
             if (url) {
                 try {
@@ -1501,11 +1581,11 @@ const firebaseConfig = {
             dotsContainer.addEventListener('click', e => { if(e.target.matches('.dot')) showSlide(parseInt(e.target.dataset.index)); });
             setInterval(() => showSlide((index + 1) % slides.length), 5000);
         }
-        
+
         async function loadFeaturesPage() {
             const container = document.getElementById('features-page');
             container.querySelectorAll('[id$="-display"]').forEach(el => el.textContent = '...');
-            
+
             try {
                 const depositQuery = query(collection(db, "deposits"), where("userId", "==", userData.tgChatId), where("status", "==", "approved"));
                 const depositSnapshot = await getDocs(depositQuery);
@@ -1526,7 +1606,7 @@ const firebaseConfig = {
                 const sendSnapshot = await getDocs(sendQuery);
                 const totalSend = sendSnapshot.docs.reduce((sum, doc) => sum + doc.data().amount, 0);
                 document.getElementById('total-send-display').textContent = `৳${totalSend.toFixed(2)}`;
-                
+
                 await loadTransferHistory();
             } catch (error) {
                 console.error("Error loading features page data:", error);
@@ -1537,10 +1617,10 @@ const firebaseConfig = {
         async function loadTransferHistory() {
             const historyList = document.getElementById('transfer-history-list');
             historyList.innerHTML = getLoadingHTML();
-            
+
             const sentQuery = query(collection(db, "transfers"), where("fromId", "==", userData.tgChatId), orderBy("timestamp", "desc"));
             const receivedQuery = query(collection(db, "transfers"), where("toId", "==", userData.tgChatId), orderBy("timestamp", "desc"));
-            
+
             try {
                 const [sentSnapshot, receivedSnapshot] = await Promise.all([getDocs(sentQuery), getDocs(receivedQuery)]);
                 const transactions = [];
@@ -1571,10 +1651,9 @@ const firebaseConfig = {
 
         function handleReceive() {
             const message = `আপনার রিসিভ আইডি:\n\n${userData.tgChatId}\n\nএই আইডি ব্যবহার করে অন্য ব্যবহারকারীর থেকে ব্যালেন্স রিসিভ করতে পারবেন।`;
-            copyToClipboard(userData.tgChatId, null);
-            showAlert(message);
+            copyToClipboard(userData.tgChatId, null, message);
         }
-        
+
         function setupDynamicAmountHandlers(pageType) {
             const amountInput = document.getElementById(`${pageType}-amount`);
             const feeDisplay = document.getElementById(`${pageType}-fee-display`);
@@ -1588,7 +1667,7 @@ const firebaseConfig = {
                 if (isNaN(currentAmount) || currentAmount < 0) {
                     currentAmount = 0;
                 }
-                
+
                 if (currentAmount > maxAmount) {
                     amountInput.value = maxAmount;
                     currentAmount = maxAmount;
@@ -1602,7 +1681,7 @@ const firebaseConfig = {
                 }
             });
         }
-        
+
         async function handleSendRequest() {
             const recipientId = document.getElementById('send-recipient-id').value.trim();
             const amountStr = document.getElementById('send-amount').value;
@@ -1636,15 +1715,15 @@ const firebaseConfig = {
 
                     transaction.update(senderRef, { balance: newSenderBalance });
                     transaction.update(recipientRef, { balance: newRecipientBalance });
-                    
+
                     const transferLogRef = doc(collection(db, "transfers"));
                     transaction.set(transferLogRef, { fromId: userData.tgChatId, fromName: userData.name, toId: recipientId, toName: recipientDoc.data().name, amount: amount, fee: fee, totalDeducted: totalCost, timestamp: serverTimestamp() });
                 });
-                
+
                 userData.balance -= totalCost;
                 updateUI();
                 showAlert(`সফলভাবে ৳${amount.toFixed(2)} পাঠানো হয়েছে।`);
-                
+
                 document.getElementById('send-recipient-id').value = '';
                 document.getElementById('send-amount').value = '';
                 document.getElementById('send-fee-display').textContent = '';
@@ -1657,7 +1736,7 @@ const firebaseConfig = {
                 loader.style.display = 'none';
             }
         }
-        
+
         async function handleRechargeRequest() {
             const number = document.getElementById('recharge-number').value.trim();
             const amountStr = document.getElementById('recharge-amount').value;
@@ -1691,7 +1770,7 @@ const firebaseConfig = {
                 userData.balance -= totalCost;
                 updateUI();
                 showAlert("আপনার রিচার্জ অনুরোধ সফলভাবে জমা হয়েছে।");
-                
+
                 document.getElementById('recharge-number').value = '';
                 document.getElementById('recharge-amount').value = '';
                 document.getElementById('recharge-operator').value = '';
@@ -1704,7 +1783,7 @@ const firebaseConfig = {
                 loader.style.display = 'none';
             }
         }
-        
+
         async function loadRechargeHistory() {
             const historyList = document.getElementById('recharge-history-list');
             historyList.innerHTML = getLoadingHTML();
@@ -1756,7 +1835,7 @@ const firebaseConfig = {
                 const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(5));
                 const snapshot = await getDocs(q);
                 if (snapshot.empty) return reviewListEl.innerHTML = '<p class="text-center text-gray-600">কোনো রিভিউ পাওয়া যায়নি।</p>';
-                
+
                 reviewListEl.innerHTML = snapshot.docs.map(doc => {
                     const review = doc.data();
                     let stars = '';
@@ -1769,19 +1848,18 @@ const firebaseConfig = {
                 console.error("Error loading reviews: ", e);
             }
         }
-        
-        // NEW: Load Support Page dynamically from Firebase
-        async function loadSupportPage() {
+
+        async function loadSupportMenu() {
             const supportContainer = document.getElementById('support-channels-list');
             supportContainer.innerHTML = getLoadingHTML();
             try {
-                const q = query(collection(db, "support_channels"));
+                const q = query(collection(db, "support_channels"), orderBy("order", "asc"));
                 const snapshot = await getDocs(q);
                 if (snapshot.empty) {
-                    supportContainer.innerHTML = '<p class="text-center text-gray-600">দুঃখিত, এই মুহূর্তে কোনো সাপোর্ট চ্যানেল উপলব্ধ নেই।</p>';
+                    supportContainer.innerHTML = '<p class="p-4 text-center text-gray-600">দুঃখিত, এই মুহূর্তে কোনো সাপোর্ট চ্যানেল উপলব্ধ নেই।</p>';
                     return;
                 }
-                
+
                 supportContainer.innerHTML = snapshot.docs.map(doc => {
                     const channel = doc.data();
                     return `
@@ -1793,7 +1871,7 @@ const firebaseConfig = {
                 }).join('');
 
             } catch (e) {
-                supportContainer.innerHTML = '<p class="text-center text-red-600">সাপোর্ট অপশন লোড করা যায়নি।</p>';
+                supportContainer.innerHTML = '<p class="p-4 text-center text-red-600">সাপোর্ট অপশন লোড করা যায়নি।</p>';
                 console.error("Error loading support channels:", e);
             }
         }
@@ -1820,7 +1898,7 @@ const firebaseConfig = {
             const confirmPin = document.getElementById('confirm-pin').value;
             if (pin.length !== 4 || !/^\d{4}$/.test(pin)) return showAlert("⚠️ পিন অবশ্যই ৪ সংখ্যার হতে হবে।");
             if (pin !== confirmPin) return showAlert("⚠️ PIN does not match.");
-            
+
             loader.style.display = 'flex';
             try {
                 const userRef = doc(db, "users", userData.tgChatId);
@@ -1854,13 +1932,13 @@ const firebaseConfig = {
                 let recentFails = (userData.pinFailAttempts || []).map(t => t.toDate());
                 recentFails = recentFails.filter(t => t > fiveMinutesAgo);
                 recentFails.push(now.toDate());
-                
+
                 userData.pinFailAttempts = recentFails.map(d => Timestamp.fromDate(d));
 
                 if (recentFails.length >= 3) {
                     const tenHoursLater = new Date(now.toDate().getTime() + 10 * 60 * 60 * 1000);
                     const lockTimestamp = Timestamp.fromDate(tenHoursLater);
-                    
+
                     userData.featuresLockedUntil = lockTimestamp;
                     userData.pinFailAttempts = [];
 
@@ -1868,7 +1946,7 @@ const firebaseConfig = {
                         pinFailAttempts: [],
                         featuresLockedUntil: lockTimestamp
                     });
-                    
+
                     document.getElementById('pin-enter-modal').classList.add('hidden');
                     showAlert("আপনি ইতিমধ্যে ৩ বার ভুল পিন দিয়েছেন। আপনার একাউন্ট নিরাপত্তার জন্য ১০ ঘণ্টার জন্য লক করা হয়েছে।");
                 } else {
